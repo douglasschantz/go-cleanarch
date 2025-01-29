@@ -3,7 +3,7 @@ package database
 import (
 	"database/sql"
 
-	"github.com/douglasschantz/gocleanarch/internal/entity"
+	"github.com/douglasschantz/go-cleanarch/internal/entity"
 )
 
 type OrderRepository struct {

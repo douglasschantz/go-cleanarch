@@ -9,12 +9,12 @@ package main
 import (
 	"database/sql"
 	"github.com/google/wire"
-	"github.com/douglasschantz/gocleanarch/internal/entity"
-	"github.com/douglasschantz/gocleanarch/internal/event"
-	"github.com/douglasschantz/gocleanarch/internal/infra/database"
-	"github.com/douglasschantz/gocleanarch/internal/infra/web"
-	"github.com/douglasschantz/gocleanarch/internal/usecase"
-	"github.com/douglasschantz/gocleanarch/pkg/events"
+	"github.com/douglasschantz/go-cleanarch/internal/entity"
+	"github.com/douglasschantz/go-cleanarch/internal/event"
+	"github.com/douglasschantz/go-cleanarch/internal/infra/database"
+	"github.com/douglasschantz/go-cleanarch/internal/infra/web"
+	"github.com/douglasschantz/go-cleanarch/internal/usecase"
+	"github.com/douglasschantz/go-cleanarch/pkg/events"
 )
 
 import (

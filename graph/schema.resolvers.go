@@ -7,8 +7,8 @@ package graph
 import (
 	"context"
 
-	"github.com/douglasschantz/gocleanarch/graph/model"
-	"github.com/douglasschantz/gocleanarch/internal/usecase"
+	"github.com/douglasschantz/go-cleanarch/graph/model"
+	"github.com/douglasschantz/go-cleanarch/internal/usecase"
 )
 
 // CreateOrder is the resolver for the createOrder field.

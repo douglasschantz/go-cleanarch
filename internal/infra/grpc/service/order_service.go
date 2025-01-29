@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/douglasschantz/gocleanarch/internal/infra/grpc/pb"
-	"github.com/douglasschantz/gocleanarch/internal/usecase"
+	"github.com/douglasschantz/go-cleanarch/internal/infra/grpc/pb"
+	"github.com/douglasschantz/go-cleanarch/internal/usecase"
 )
 
 type OrderService struct {

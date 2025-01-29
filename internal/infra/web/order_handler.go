@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/douglasschantz/gocleanarch/internal/entity"
-	"github.com/douglasschantz/gocleanarch/internal/usecase"
-	"github.com/douglasschantz/gocleanarch/pkg/events"
+	"github.com/douglasschantz/go-cleanarch/internal/entity"
+	"github.com/douglasschantz/go-cleanarch/internal/usecase"
+	"github.com/douglasschantz/go-cleanarch/pkg/events"
 )
 
 type WebOrderHandler struct {

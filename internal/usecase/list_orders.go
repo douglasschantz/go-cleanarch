@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/douglasschantz/gocleanarch/internal/entity"
+import "github.com/douglasschantz/go-cleanarch/internal/entity"
 
 type OrdersOutputDTO struct {
 	ID         string  `json:"id"`

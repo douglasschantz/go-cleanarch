@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+
   mysql:
     image: mysql:5.7
     container_name: mysql
@@ -11,6 +12,26 @@ services:
       MYSQL_PASSWORD: root
     ports:
       - 3306:3306
+    networks:
+      - goexpert
+
+  migrations:
+    hostname: migrations
+    container_name: migrations
+    restart: no
+    image: migrate/migrate:v4.17.1
+    networks: 
+      - goexpert
+    environment:
+      MYSQL_DATABASE: orders
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./sql/migrations:/migrations
+    command: -path=/migrations -database "mysql://root:root@tcp(mysql:3306)/orders" -verbose up
+    depends_on:
+      mysql:
+        condition: service_healthy
+      
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -21,3 +42,10 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    networks:
+     - goexpert
+
+
+networks:
+  goexpert:
+    driver: bridge

@@ -1,6 +1,6 @@
 package graph
 
-import "github.com/douglasschantz/gocleanarch/internal/usecase"
+import "github.com/douglasschantz/go-cleanarch/internal/usecase"
 
 // This file will not be regenerated automatically.
 //

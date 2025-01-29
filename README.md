@@ -19,38 +19,22 @@ Esta listagem precisa ser feita com:
 Clone o repositório com o comando abaixo:
 
 ```bash
-git clone https://github.com/douglasschantz/gocleanarch.git
+git clone https://github.com/douglasschantz/go-cleanarch.git
 ```
 
 Entre no diretório do projeto:
 
 ```bash
-cd goexpert-clean-arch
+cd go-cleanarch
 ```
 
-Execute o docker para subir a imagem do MySQL e do RabbitMQ:
-
-```bash
-docker-compose up -d
+Instale as dependências e suba os containers para as criações das migrations necessárias no Makefile
+``` shell
+make install
+make up
 ```
 
 Após subir as imagens, vamos verificar o banco de dados está `orders` está criado:
-
-```bash
-docker exec -it mysql bash -c "mysql -u root -proot -D orders"
-```
-
-Caso não esteja criado, sera exibido no terminal a seguinte mensagem: `Unknown database 'orders'`, portanto, execute o seguinte comando:
-
-```bash
-docker exec -it mysql bash -c "mysql -u root -proot"
-```
-
-```bash
-CREATE DATABASE orders;
-```
-
-Com o banco de dados criados, vamos verificar se existe a tabela `orders`:
 
 ```bash
 docker exec -it mysql bash -c "mysql -u root -proot -D orders"

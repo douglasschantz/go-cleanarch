@@ -1,4 +1,4 @@
-module github.com/douglasschantz/gocleanarch
+module github.com/douglasschantz/go-cleanarch
 
 go 1.23.1
 

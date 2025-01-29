@@ -10,7 +10,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler/lru"
 	"github.com/99designs/gqlgen/graphql/handler/transport"
 	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/douglasschantz/gocleanarch/graph"
+	"github.com/douglasschantz/go-cleanarch/graph"
 	"github.com/vektah/gqlparser/v2/ast"
 )
 
