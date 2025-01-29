@@ -32,6 +32,7 @@ Instale as dependências e suba os containers para as criações das migrations 
 ``` shell
 make install
 make up
+make migration_up
 ```
 
 Após subir as imagens, vamos verificar o banco de dados está `orders` está criado:
@@ -63,7 +64,7 @@ go mod tidy
 Agora iremos executar nossa aplicação:
 
 ```bash
-cd cmd/ordersystem && go run main.go wire_gen.go
+make run
 ```
 
 Caso ocorra tudo bem, os serviços estarão rodando nos endereços:

@@ -83,6 +83,10 @@ clean:
 	@docker compose -f $(DOCKER_COMPOSE_FILE) down -v --rmi all
 	@docker system prune -f
 
+.PHONY: tidy
+tidy:
+	@go mod tidy
+
 .PHONY: run
 run: ## Run the rest-api, grpc and graphql servers
 	@cd cmd/ordersystem && go run main.go wire_gen.go
