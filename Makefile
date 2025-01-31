@@ -59,7 +59,8 @@ build: ## Build the container image
 
 .PHONY: up
 up: ## Put the compose containers up
-	@docker-compose up -d
+	@docker-compose up
+#@docker-compose up --build
 
 .PHONY: down
 down: ## Put the compose containers down

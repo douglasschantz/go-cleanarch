@@ -1,0 +1,29 @@
+app:
+  name: go-cleanarch
+  env: ../cmd/ordersystem/.env
+
+server:
+  grpc:
+    port: 50051
+  http:
+    port: 8000
+  graphql:
+    port: 8080
+    playground: true
+
+database:
+  host: ${DB_HOST}
+  port: 3306
+  user: ${DB_USER}
+  password: ${DB_PASSWORD}
+  name: ${DB_NAME}
+  ssl: false
+
+rabbitmq:
+  #host: rabbitmq
+  #port: 5672
+  #user: guest
+  #password: guest
+  #vhost: /
+  url: "amqp://guest:guest@rabbitmq:5672/"
+  

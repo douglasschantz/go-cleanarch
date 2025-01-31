@@ -28,7 +28,21 @@ Entre no diretório do projeto:
 cd go-cleanarch
 ```
 
-Instale as dependências e suba os containers para as criações das migrations necessárias no Makefile
+## Como rodar a aplicação para subir no Docker
+``` shell
+make up
+ou
+docker-compose up
+```
+
+## Portas para utilizacao da aplicação
+``` shell
+    50051  gRPC
+    8000   WebServer
+    8080   GraphQL
+```
+
+Caso for trabalhar com as migrations instale as dependências e suba os containers para as criações migrations necessárias no Makefile
 ``` shell
 make install
 make up
@@ -45,26 +59,6 @@ Rode o camando abaixo verificar se existe:
 
 ```bash
 select * from orders.orders;
-```
-
-Caso não, execute o comando abaixo:
-
-```bash
-CREATE TABLE orders (id varchar(255) NOT NULL, price float NOT NULL, tax float NOT NULL, final_price float NOT NULL, PRIMARY KEY (id));
-```
-
-## Como rodar
-
-No diretório do projeto, execute o comando abaixo para baixar as dependências:
-
-```bash
-go mod tidy
-```
-
-Agora iremos executar nossa aplicação:
-
-```bash
-make run
 ```
 
 Caso ocorra tudo bem, os serviços estarão rodando nos endereços:

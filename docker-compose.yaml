@@ -1,25 +1,45 @@
-version: '3'
+version: '3.8'
 
 services:
-
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: mysql
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: orders
       MYSQL_PASSWORD: root
     ports:
-      - 3306:3306
+      - "3306:3306"
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
     networks:
-      - goexpert
+      - app-network
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      start_period: 10s
-      interval: 10s
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
       timeout: 10s
-      retries: 3
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
 
   migrations:
     hostname: migrations
@@ -27,7 +47,7 @@ services:
     restart: no
     image: migrate/migrate:v4.17.1
     networks: 
-      - goexpert
+      - app-network
     environment:
       MYSQL_DATABASE: orders
       MYSQL_ROOT_PASSWORD: root
@@ -37,21 +57,33 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-      
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    restart: always
-    ports:
-      - 5672:5672
-      - 15672:15672
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
-    networks:
-     - goexpert
 
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go-app
+    ports:
+      - "50051:50051"  # gRPC
+      - "8000:8000"    # Web Server
+      - "8080:8080"    # GraphQL
+    depends_on:
+      mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - app-network
+    environment:
+      MYSQL_DSN: "root:root@tcp(mysql:3306)/orders"
+      RABBITMQ_URL: "amqp://guest:guest@rabbitmq:5672/"
+    volumes:
+      - ./configs:/app/configs  # Monta o diretório de configurações
+    
+volumes:
+  mysql_data:
+  rabbitmq_data:
 
 networks:
-  goexpert:
+  app-network:
     driver: bridge
